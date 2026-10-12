@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -6,9 +8,10 @@ const { Pool } = require("pg");
 app.use(express.json());
 app.use(express.static('public'));
 
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, function(){
-    console.log("Server is running on port 5000");
+app.listen(PORT, function() {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 app.get("/", function(req, res){
@@ -120,12 +123,13 @@ app.get("/quotes", async function(req,res){
     }
 });
 
+
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "bookservice",
-    password: "postgre",
-    port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === "production"
+    ? { rejectUnauthorized: false }
+    : false,
 });
+
 
 
