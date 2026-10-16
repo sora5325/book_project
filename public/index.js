@@ -67,15 +67,57 @@ document.addEventListener("DOMContentLoaded", function() {
         //send a GET request to /books
         try{
             //GET has an URL but not a body. Header and method are automatically set to default
-            const response = await fetch("/books?search_id="+book_id+"&search_title="+title+"&want_to_read_rating="+want_to_read_rating);
-    
+           
+            const params = new URLSearchParams({
+                search_id: book_id,
+                search_title: title,
+                search_want_to_read_rating: want_to_read_rating
+            });
+
+            const response = await fetch("/books?" + params);
+
             if (!response.ok){
                 throw new Error("Server error");
             }
         
+           
+
             const result = await response.json();
             console.log("Successfully gotten:", result);
-            document.getElementById("bookresult").innerHTML = JSON.stringify(result);
+
+            const bookresult = document.getElementById("bookresult");
+
+            bookresult.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                            <th>Want-to-read rating</th>
+                            <th>Expectation notes</th>
+                            <th>Outcome notes</th>
+                            <th>Reread</th>
+                            <th>Relevance rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${result.map(book => `
+                            <tr>
+                                <td>${book.title ?? ""}</td>
+                                <td>${book.author ?? ""}</td>
+                                <td>${book.status ?? ""}</td>
+                                <td>${book.want_to_read_rating ?? ""}</td>
+                                <td>${book.expectation_notes ?? ""}</td>
+                                <td>${book.outcome_notes ?? ""}</td>
+                                <td>${book.reread ?? ""}</td>
+                                <td>${book.relevance_rating ?? ""}</td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            `;
+
 
         } catch (error) {
             console.error("Failed", error);
@@ -94,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const book_id = Number(document.getElementById("book_id").value);
         const page = Number(document.getElementById("page").value);
         const quote_text = document.getElementById("quote_text").value;
-        const thought = Number(document.getElementById("thought").value);
+        const thought = document.getElementById("thought").value;
 
         //send a POST request to /quotes
         try{
@@ -143,9 +185,35 @@ document.addEventListener("DOMContentLoaded", function() {
                 throw new Error("Server error");
             }
         
+            
             const result = await response.json();
             console.log("Successfully gotten:", result);
-            document.getElementById("quoteresult").innerHTML = JSON.stringify(result);
+
+            const quoteresult = document.getElementById("quoteresult");
+
+            quoteresult.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Page</th>
+                            <th>Quote</th>
+                            <th>Thoughts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${result.map(quote => `
+                            <tr>
+                                <td>${quote.book_id ?? ""}</td>
+                                <td>${quote.page ?? ""}</td>
+                                <td>${quote.quote_text ?? ""}</td>
+                                <td>${quote.thought ?? ""}</td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            `;
+
         } catch (error) {
             console.error("Failed", error);
         };

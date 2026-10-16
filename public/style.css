@@ -1,0 +1,116 @@
+
+/* Overall page */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 32px 20px;
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #252938;
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    color: #252938;
+}
+
+h1 {
+    margin-bottom: 8px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+/* Forms and input fields */
+input, select, textarea, button {
+    font: inherit;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 5px 0 12px;
+    border: 1px solid #d5d9e2;
+    border-radius: 6px;
+    background: white;
+    color: #252938;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid #a5b4fc;
+    border-color: #6366f1;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #4338ca;
+}
+
+/* Sections: add class="panel" to the relevant wrappers */
+.panel {
+    margin: 20px 0;
+    padding: 24px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #2020400a;
+}
+
+/* Search results */
+.results {
+    margin-top: 16px;
+    overflow-x: auto;
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 0.95rem;
+}
+
+.results th, .results td {
+    padding: 11px 13px;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+.results th {
+    background: #eef0ff;
+    font-weight: 600;
+}
+
+.results tbody tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+.results tbody tr:hover {
+    background: #f0f3ff;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+}

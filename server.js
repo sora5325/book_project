@@ -19,19 +19,34 @@ app.get("/", function(req, res){
 });
 
 //when a POST request is sent to /books, add book data to the books table
-app.post("/books", async function(req,res){
+//GET request in /books
+
+app.post("/books", async function(req, res) {
+    const password = req.get("x-add-data-password");
+
+    if (!password || password !== process.env.ADD_DATA_PASSWORD) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+
     console.log(req.body);
-    try{
-        const {title, author, status, want_to_read_rating, expectation_notes, outcome_notes, reread, relevance_rating, created_at} = req.body;
+
+    try {
+        const {
+            title, author, status, want_to_read_rating,
+            expectation_notes, outcome_notes, reread,
+            relevance_rating, created_at
+        } = req.body;
+
         const result = await pool.query(
             "INSERT INTO books (title, author, status, want_to_read_rating, expectation_notes, outcome_notes, reread, relevance_rating, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
-            [title,author,status, want_to_read_rating, expectation_notes, outcome_notes, reread, relevance_rating, created_at]
+            [title, author, status, want_to_read_rating, expectation_notes, outcome_notes, reread, relevance_rating, created_at]
         );
+
         res.json(result.rows[0]);
 
-    } catch(error){
+    } catch(error) {
         console.error(error);
-        res.status(500).json({error: "Data doesn't match the conditions"});
+        res.status(500).json({ error: "Data doesn't match the conditions" });
     }
 });
 
@@ -72,22 +87,34 @@ app.get("/books", async function(req,res){
     }
 });
 
+
 //POST to /quotes
-app.post("/quotes", async function(req,res){
+
+app.post("/quotes", async function(req, res) {
+    const password = req.get("x-add-data-password");
+
+    if (!password || password !== process.env.ADD_DATA_PASSWORD) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+
     console.log(req.body);
-    try{
-        const {book_id, page, quote_text, thought} = req.body;
+
+    try {
+        const { book_id, page, quote_text, thought } = req.body;
+
         const result = await pool.query(
             "INSERT INTO quotes (book_id, page, quote_text, thought) VALUES ($1, $2, $3, $4) RETURNING *",
             [book_id, page, quote_text, thought]
         );
+
         res.json(result.rows[0]);
 
-    } catch(error){
+    } catch(error) {
         console.error(error);
-        res.status(500).json({error: "Internal Server error"});
+        res.status(500).json({ error: "Internal Server error" });
     }
 });
+
 
 //GET request in /quotes
 app.get("/quotes", async function(req,res){

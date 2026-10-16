@@ -3,57 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>book service</title>
+    
+    <link rel="stylesheet" href="/style.css">
+
 </head>
 <body>
-    <h1>Add book</h1>
-    <form id="bookform">
-        <input type="text" id="title" placeholder="Title"/>
-        <input type="text" id="author" placeholder="Author"/>
-        <select id="status">
-            <option value="">Status</option>
-            <option value="wishlisted">wishlisted</option>
-            <option value="pending">pending</option>
-            <option value="reading">reading</option>
-            <option value="finished">finished</option>
-            <option value="abandoned">abandoned</option>
-        </select>
-        <input type="number" id="want_to_read_rating" placeholder="Want to read rating 1-5"/>
-        <input type="text" id="expectation_notes" placeholder="Expectation notes"/>
-        <input type="text" id="outcome_notes" placeholder="Outcome notes"/>
-        <input type="checkbox" id="reread"/>
-        <label for="reread">Reread?</label>
-        <input type="number" id="relevance_rating" placeholder="Relevance rating 1-10"/>
-        <input type="date" id="created_at" name="Created at"/>
-        <button type="submit">Add Book</button>
-    </form>
+    <div class="panel">
+        <h1>Add book</h1>
+        <form id="bookform">
+            <input type="text" id="title" placeholder="Title"/>
+            <input type="text" id="author" placeholder="Author"/>
+            <select id="status">
+                <option value="">Status</option>
+                <option value="wishlisted">wishlisted</option>
+                <option value="pending">pending</option>
+                <option value="reading">reading</option>
+                <option value="finished">finished</option>
+                <option value="abandoned">abandoned</option>
+            </select>
+            <input type="number" id="want_to_read_rating" placeholder="Want to read rating 1-5"/>
+            <input type="text" id="expectation_notes" placeholder="Expectation notes"/>
+            <input type="text" id="outcome_notes" placeholder="Outcome notes"/>
+            <input type="checkbox" id="reread"/>
+            <label for="reread">Reread?</label>
+            <input type="number" id="relevance_rating" placeholder="Relevance rating 1-10"/>
+            <input type="date" id="created_at" name="Created at"/>
+            <button type="submit">Add Book</button>
+        </form>
 
-    <h2>Search book</h2>
-    <form id="booksearch">
-        <input type="text" id="search_title" placeholder="Title"/>
-        <input type="number" id="search_id" placeholder="Book id"/>
-        <input type="number" id="search_want_to_read_rating" placeholder="Want to read rating"/>
-        <button type="submit">Search</button>
-    </form>
-    <p id="bookresult">Result will appear here</p>
+        <h2>Search book</h2>
+        <form id="booksearch">
+            <input type="text" id="search_title" placeholder="Title"/>
+            <input type="number" id="search_id" placeholder="Book id"/>
+            <input type="number" id="search_want_to_read_rating" placeholder="Want to read rating"/>
+            <button type="submit">Search</button>
+        </form>
+        <p id="bookresult" class="results">Result will appear here</p>
+    </div>
 
 
     <br>
-    <h1>Add quote</h1>
-    <form id="quoteform">
-        <input type="number" id="book_id" placeholder="Book id"/>
-        <input type="number" id="page" placeholder="Page"/>
-        <input type="text" id="quote_text" placeholder="Quote text"/>
-        <input type="text" id="thought" placeholder="Thought"/>
-        <button type="submit">Add quote</button>
-    </form>
+    <div class="panel">
+        <h1>Add quote</h1>
+        <form id="quoteform">
+            <input type="number" id="book_id" placeholder="Book id"/>
+            <input type="number" id="page" placeholder="Page"/>
+            <input type="text" id="quote_text" placeholder="Quote text"/>
+            <input type="text" id="thought" placeholder="Thought"/>
+            <button type="submit">Add quote</button>
+        </form>
 
-    <h2>Search quote</h2>
-    <form id="quotesearch">
-        <input type="text" id="search_book_id" placeholder="Book id"/>
-        <input type="text" id="search_quote_text" placeholder="Quote text"/>
-        <button type="submit">Search</button>
-    </form>
-    <p id="quoteresult">Result will appear here</p>
+        <h2>Search quote</h2>
+        <form id="quotesearch">
+            <input type="text" id="search_book_id" placeholder="Book id"/>
+            <input type="text" id="search_quote_text" placeholder="Quote text"/>
+            <button type="submit">Search</button>
+        </form>
+        <p id="quoteresult" class="results">Result will appear here</p>
+    </div>
 
     <script src="index.js"></script>
 </body>
