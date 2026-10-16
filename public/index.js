@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: "POST",
                 //metadata about the request. 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "x-add-data-password": document.getElementById("addDataPassword").value
                 },
                 //actual data being sent
                 //stringify: convert the object into JSON string
@@ -144,7 +145,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: "POST",
                 //metadata about the request. 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "x-add-data-password": document.getElementById("addDataPassword").value
                 },
                 //actual data being sent
                 //stringify: convert the object into JSON string
